@@ -6,4 +6,5 @@
              Title="UserPage">
 
     <local:Tracks></local:Tracks>
+    <local:Profile></local:Profile>
 </TabbedPage>

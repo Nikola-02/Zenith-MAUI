@@ -2,19 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Zenith_MAUI.Pages.Profile"
+             xmlns:local="clr-namespace:Zenith_MAUI.ViewModels"
              Title="Profile">
+
+    <ContentPage.BindingContext>
+        <local:MProfileViewModel/>
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout>
         <Label 
             Text="Welcome to Profile Page!"
+            FontSize="20"
+            FontAttributes="Bold"
+            Margin="0,15,0,0"
+            TextColor="Azure"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Label 
-            Text="{Binding Username.Value}"
-            Style="{StaticResource Headline}"
-            SemanticProperties.HeadingLevel="Level6" 
-            Margin="0,30"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Image
+            Source="profile.png"
+            HeightRequest="185"
+            Aspect="AspectFit"
+            Margin="0,15,0,0"
+            />
+
+        <FlexLayout JustifyContent="Center">
+            <Label 
+                Text="Username:"
+                Style="{StaticResource Headline}"
+                FontSize="17"
+                Margin="0,0,10,0"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <Label 
+                Text="{Binding Username.Value}"
+                Style="{StaticResource Headline}"
+                FontSize="17"
+                FontAttributes="Bold"
+                Margin="0,20"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+        </FlexLayout>
+
+        <Button
+            Text="Logout"
+            Margin="80,15,80,0"
+            Command="{Binding LogoutCommand}"
+            />
+
     </VerticalStackLayout>
 </ContentPage>

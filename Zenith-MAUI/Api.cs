@@ -13,7 +13,7 @@ namespace Zenith_MAUI
         private static RestClient _client;
 
         private static bool authorizationSet = false;
-
+        
         public static string BaseUrl => "http://localhost:5001/api/";
 
         public static RestClient Client
@@ -22,12 +22,12 @@ namespace Zenith_MAUI
             {
                 if(_client == null)
                 {
-                    _client = new RestClient();
+                    _client = new RestClient(BaseUrl);
                 }
 
                 var user = SecureStorage.Default.GetUser();
 
-                if(user != null && !authorizationSet)
+                if (user != null && !authorizationSet)
                 {
                     authorizationSet = true;
                     _client.AddDefaultHeader("Authorization", "Bearer " + user.Token);

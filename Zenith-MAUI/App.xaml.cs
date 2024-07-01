@@ -1,4 +1,7 @@
 ﻿
+using Zenith_MAUI.Common;
+using Zenith_MAUI.Pages;
+
 namespace Zenith_MAUI
 {
     public partial class App : Application
@@ -7,7 +10,16 @@ namespace Zenith_MAUI
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            var user = SecureStorage.Default.GetUser();
+
+            if (user != null)
+            {
+                MainPage = new UserPage();
+            }
+            else
+            {
+                MainPage = new Login();
+            }
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zenith_MAUI.Pages.Login"
+             xmlns:local="clr-namespace:Zenith_MAUI.ViewModels"
+             Title="Login">
+
+    <ContentPage.BindingContext>
+        <local:MLoginViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,50"
+        >
+
+            <Label
+            Text="Login here:"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level6" Margin="0,30" />
+
+            <Entry Placeholder="Email" Text="{Binding Email.Value}"  />
+            <Label Text="{Binding Email.Error}" TextColor="Red" />
+
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password.Value}" />
+            <Label IsVisible="{Binding Password.HasError}" Text="{Binding Password.Error}" TextColor="Red" />
+
+            <Button
+            x:Name="LoginBtn"
+            IsEnabled="{Binding ButtonEnabled.Value}"
+            Text="Login" 
+            Command="{Binding LoginCommand}"
+            SemanticProperties.Hint="Login user"
+            HorizontalOptions="Fill" />
+
+            <Label Text="Invalid credentials." IsVisible="{Binding InvalidCredentials.Value}" TextColor="Red"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -23,7 +23,7 @@
         <CollectionView ItemsSource="{Binding Tracks}" HeightRequest="550">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <cmp:TrackComponent Id="{Binding Id}" Name="{Binding Name}" Description="{Binding Text}" Image="{Binding Image}" Price="{Binding Price}" Duration="{Binding Duration}" Artist="{Binding Artist.Name}" LikesCount="{Binding LikesCount}"/>
+                    <cmp:TrackComponent Id="{Binding Id}" Name="{Binding Name}" Description="{Binding Text}" Image="{Binding Image}" Price="{Binding Price}" Duration="{Binding Duration}" Artist="{Binding Artist.Name}" Album="{Binding Album.Name}" Genre="{Binding Genre.Name}" LikesCount="{Binding LikesCount}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

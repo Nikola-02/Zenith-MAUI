@@ -15,7 +15,7 @@
             FontSize="20"
             FontAttributes="Bold"
             Margin="0,15,0,0"
-            TextColor="Azure"
+            TextColor="BlueViolet"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 

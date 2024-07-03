@@ -26,6 +26,12 @@ public partial class TrackComponent : ContentView
     public static BindableProperty ArtistProperty =
        BindableProperty.Create(nameof(Artist), typeof(string), typeof(TrackComponent), "/", BindingMode.OneWay);
 
+    public static BindableProperty AlbumProperty =
+      BindableProperty.Create(nameof(Album), typeof(string), typeof(TrackComponent), "/", BindingMode.OneWay);
+    
+    public static BindableProperty GenreProperty =
+      BindableProperty.Create(nameof(Genre), typeof(string), typeof(TrackComponent), "/", BindingMode.OneWay);
+
     public static BindableProperty LikesCountProperty =
        BindableProperty.Create(nameof(LikesCount), typeof(int), typeof(TrackComponent), 0, BindingMode.OneWay);
 
@@ -76,6 +82,18 @@ public partial class TrackComponent : ContentView
         set => SetValue(ArtistProperty, value);
     }
 
+    public string Album
+    {
+        get => (string)GetValue(AlbumProperty);
+        set => SetValue(AlbumProperty, value);
+    }
+
+    public string Genre
+    {
+        get => (string)GetValue(GenreProperty);
+        set => SetValue(GenreProperty, value);
+    }
+
     public int LikesCount
     {
         get => (int)GetValue(LikesCountProperty);
@@ -84,7 +102,6 @@ public partial class TrackComponent : ContentView
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-
-        App.Current.MainPage.Navigation.PushAsync(new SingleTrack(Id));
+        App.Current.MainPage.Navigation.PushModalAsync(new SingleTrack(Id, Name, Description, Duration, Price, Image, Artist, Album, Genre, LikesCount));
     }
 }

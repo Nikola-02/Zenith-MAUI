@@ -27,6 +27,7 @@
 
             <Button
             x:Name="LoginBtn"
+            Margin="0,20,0,0"
             IsEnabled="{Binding ButtonEnabled.Value}"
             Text="Login" 
             Command="{Binding LoginCommand}"

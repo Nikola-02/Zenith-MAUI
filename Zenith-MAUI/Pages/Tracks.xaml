@@ -30,15 +30,19 @@
 
         <FlexLayout JustifyContent="SpaceAround" Padding="0,50,0,0"> 
             <Button 
-                Text="Prev"/>
+                Text="Prev"
+                Command="{Binding PrevCommand}"
+                />
 
             <Label
-                    Text="{Binding ResponseObj.CurrentPage}"
+                    Text="{Binding Page.Value}"
                     Margin="0,5,0,0"
                 />
 
             <Button 
-                    Text="Next"/>
+                    Text="Next"
+                    Command="{Binding NextCommand}"
+                />
         </FlexLayout>
         
 

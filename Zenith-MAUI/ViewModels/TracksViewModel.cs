@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Zenith_MAUI.Business.DTO;
 using Zenith_MAUI.Common;
 
@@ -16,15 +17,54 @@ namespace Zenith_MAUI.ViewModels
     {
         public MProp<string> Keyword { get; set; } = new MProp<string>();
         public static int PerPage => 6;
+        public MProp<int> Page { get; set; } = new MProp<int>();
 
-        public ObservableCollection<TrackDTO> Tracks { get; set; } = new ObservableCollection<TrackDTO>();
+        private ObservableCollection<TrackDTO> tracks = new ObservableCollection<TrackDTO>();
+
+        public ObservableCollection<TrackDTO> Tracks
+        {
+            get => tracks;
+            set
+            {
+                tracks = value;
+                OnPropertyChanged();
+            }
+        }
         public ResponseObjForPagination ResponseObj { get; set; } = new ResponseObjForPagination();
+
+        public ICommand NextCommand { get; }
+        public ICommand PrevCommand { get; }
 
         public TracksViewModel()
         {
             Keyword.OnChange = LoadTracks;
 
+            NextCommand = new Command(Next);
+            PrevCommand = new Command(Prev);
+
+            Tracks = new ObservableCollection<TrackDTO>();
+
+            Page.Value = 1;
+
             LoadTracks();
+        }
+
+        public void Next()
+        {
+            if (Page.Value < ResponseObj.Pages)
+            {
+                Page.Value++;
+                LoadTracks();
+            }
+        }
+
+        public void Prev()
+        {
+            if (Page.Value > 1)
+            {
+                Page.Value--;
+                LoadTracks();
+            }
         }
 
         public void LoadTracks()
@@ -36,6 +76,7 @@ namespace Zenith_MAUI.ViewModels
                 RestRequest request = new RestRequest("tracks");
                 request.AddParameter("keyword", Keyword.Value, ParameterType.QueryString);
                 request.AddParameter("perPage", PerPage, ParameterType.QueryString);
+                request.AddParameter("page", Page.Value, ParameterType.QueryString);
 
                 var response = Api.Client.Execute<PagedResponse<TrackDTO>>(request);
 
@@ -57,6 +98,7 @@ namespace Zenith_MAUI.ViewModels
 
                 RestRequest request = new RestRequest("tracks");
                 request.AddParameter("perPage", PerPage, ParameterType.QueryString);
+                request.AddParameter("page", Page.Value, ParameterType.QueryString);
 
                 var response = Api.Client.Execute<PagedResponse<TrackDTO>>(request);
 
@@ -65,14 +107,22 @@ namespace Zenith_MAUI.ViewModels
                 ResponseObj.Pages = response.Data.Pages;
                 ResponseObj.TotalCount = response.Data.TotalCount;
 
+
+
                 if (response.IsSuccessful)
                 {
                     var tracks = response.Data.Data;
-                    this.Tracks.Clear();
-                    this.Tracks = new ObservableCollection<TrackDTO>(tracks);
+                    Tracks.Clear();
+                    foreach (var track in tracks)
+                    {
+                        Tracks.Add(track);
+                    }
+                    //this.Tracks = new ObservableCollection<TrackDTO>(tracks);
                 }
 
             }
+
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

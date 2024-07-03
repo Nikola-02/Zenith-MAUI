@@ -14,11 +14,11 @@ namespace Zenith_MAUI
 
             if (user != null)
             {
-                MainPage = new UserPage();
+                MainPage = new NavigationPage(new UserPage());
             }
             else
             {
-                MainPage = new Login();
+                MainPage = new NavigationPage(new Login());
             }
         }
 

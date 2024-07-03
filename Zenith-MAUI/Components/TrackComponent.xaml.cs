@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Zenith_MAUI.Pages;
 
 namespace Zenith_MAUI.Components;
 
@@ -79,5 +80,11 @@ public partial class TrackComponent : ContentView
     {
         get => (int)GetValue(LikesCountProperty);
         set => SetValue(LikesCountProperty, value);
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+        App.Current.MainPage.Navigation.PushAsync(new SingleTrack(Id));
     }
 }

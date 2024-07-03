@@ -33,9 +33,8 @@
                     <Label Text="{Binding LikesCount}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
                 </FlexLayout>
 
-                
 
-                <Button Margin="0,20,0,0"  FontSize="Micro" Text="View"/>
+                <Button Margin="0,20,0,0"  FontSize="Micro" Text="View" Clicked="Button_Clicked"/>
             </StackLayout>
         </Border>
 

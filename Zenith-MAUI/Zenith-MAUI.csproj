@@ -82,6 +82,9 @@
 	  <MauiXaml Update="Pages\Profile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\SingleTrack.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Tracks.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

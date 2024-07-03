@@ -3,44 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Zenith_MAUI.Pages.SingleTrack"
              Title="SingleTrack">
-
-    <VerticalStackLayout Margin="30" BindingContext="{x:Reference Track}">
-
-
-        <Label Text="dadwead"/>
-        <!--Border Padding="20">
-                <StackLayout>
-                    <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
-
-                    <Image Margin="0,15,0,0" Source="{Binding Image, StringFormat='http://localhost:5001/tracks/images/{0}'}" HeightRequest="150"/>
-
-                    <Label FontSize="16" Text="{Binding Description}" FontAttributes="Italic" />
-
-                    <FlexLayout Margin="0,15,0,0" AlignContent="Center">
-                        <Label Text="Price ($): " />
-                        <Label Text="{Binding Price}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                    </FlexLayout>
-
-                    <FlexLayout Margin="0,15,0,0">
-                        <Label Text="Duration: " />
-                        <Label Text="{Binding Duration}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                    </FlexLayout>
-
-                    <FlexLayout Margin="0,15,0,0">
-                        <Label Text="Artist: " />
-                        <Label Text="{Binding Artist}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                    </FlexLayout>
-
-                    <FlexLayout Margin="0,15,0,0">
-                        <Label Text="Likes count: " />
-                        <Label Text="{Binding LikesCount}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                    </FlexLayout>
-
-
-                </StackLayout>
-            </Border>-->
-
-
-
+    <VerticalStackLayout Margin="20">
+        <Label Text="Ovo je single!"/>
     </VerticalStackLayout>
 </ContentPage>

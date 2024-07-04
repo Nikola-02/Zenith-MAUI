@@ -1,5 +1,7 @@
+using Microsoft.Maui;
 using RestSharp;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Zenith_MAUI.Business.DTO;
 using Zenith_MAUI.Common;
 
@@ -29,6 +31,8 @@ public partial class SingleTrack : ContentPage
     public MProp<string> Album { get; set; } = new MProp<string>();
     public MProp<string> Genre { get; set; } = new MProp<string>();
     public MProp<int> LikesCount { get; set; } = new MProp<int>();
+    public MProp<bool> IsLiked { get; set; } = new MProp<bool>();
+
 
     //public static BindableProperty TrackProperty =
     //   BindableProperty.Create(nameof(Track), typeof(TrackDTO), typeof(SingleTrack), new TrackDTO(), BindingMode.OneWay);
@@ -57,29 +61,81 @@ public partial class SingleTrack : ContentPage
         Album.Value = album;
         Genre.Value = genre;
         LikesCount.Value = likesCount;
+
+        GetTrack();
     }
 
-    public void LoadTrack()
+    private void GetTrack()
+    {
+        RestRequest request = new RestRequest("trackLikes/" + Id.Value);
+
+        var response = Api.Client.Execute<ExistsDTO>(request);
+
+
+        if (response.IsSuccessful)
+        {
+            IsLiked.Value = (bool)response.Data.exists;
+            OnPropertyChanged(nameof(IsLiked));
+        }
+    }
+
+    public void LikeUndoTrack()
 	{
+        if (IsLiked.Value)
+        {
+            LikesCount.Value--;
+            IsLiked.Value = false;
 
-            //RestRequest request = new RestRequest("tracks/" + Id);
+            OnPropertyChanged(nameof(IsLiked));
 
-            //var response = Api.Client.Execute<TrackDTO>(request);
+            UndoTrackRequest();
+        }
+        else
+        {
+            LikesCount.Value++;
+            IsLiked.Value = true;
 
+            OnPropertyChanged(nameof(IsLiked));
 
-            //if (response.IsSuccessful)
-            //{
-            //    Track = response.Data;
+            LikeTrackRequest();
+        }
 
-            //    BindingContext = Track;
-
-            //    OnPropertyChanged(nameof(Track));
-            //}
+       
 
     }
+
+    private void LikeTrackRequest()
+    {
+        RestRequest request = new RestRequest("trackLikes");
+
+        request.AddJsonBody(new { trackId = Id.Value });
+
+        var response = Api.Client.Post(request);
+
+    }
+
+    private void UndoTrackRequest()
+    {
+        RestRequest request = new RestRequest("trackLikes/" + Id.Value);
+
+        var response = Api.Client.Delete(request);
+
+    }
+
 
     private void Button_Clicked(object sender, EventArgs e)
     {
         App.Current.MainPage.Navigation.PopModalAsync();
+    }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+        LikeUndoTrack();
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

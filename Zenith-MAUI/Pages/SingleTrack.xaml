@@ -2,12 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Zenith_MAUI.Pages.SingleTrack"
+             xmlns:local="clr-namespace:Zenith_MAUI.ViewModels"
              x:Name="Self"
              Title="SingleTrack">
-    
-    <VerticalStackLayout Margin="20" BindingContext="{x:Reference Self}">
+
+    <ContentPage.BindingContext>
+        <local:MSingleTrackViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Margin="20" >
         <Border Padding="20">
-            <StackLayout>
+            <StackLayout BindingContext="{x:Reference Self}">
                 <Label Text="{Binding Name.Value}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold"/>
 
                 <Image Margin="0,15,0,0" Source="{Binding Image.Value, StringFormat='http://localhost:5001/tracks/images/{0}'}" HeightRequest="150"/>
@@ -47,11 +52,29 @@
                     <Label Text="{Binding LikesCount.Value}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
                 </FlexLayout>
 
-                <Button Text="Close"
-                Clicked="Button_Clicked"
+                <Button 
+                    Text="Like/Undo"
+                    WidthRequest="100"
+                    Clicked="Button_Clicked_1"
+                    Margin="0,20,0,0"
+                />
+                
+                <Label 
+                    IsVisible="{Binding IsLiked.Value}"
+                    Text="(Track is liked)"
+                    Margin="0,15,0,0"
+                    TextColor="MediumVioletRed"
+                    HorizontalOptions="Center"
+                    />
+
+                <Button 
+                        Text="Close"
+                        Clicked="Button_Clicked"
                         Margin="0,20,0,0"
                 />
             </StackLayout>
+            
         </Border>
     </VerticalStackLayout>
+
 </ContentPage>

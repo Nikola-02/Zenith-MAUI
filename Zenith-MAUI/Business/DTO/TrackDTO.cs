@@ -21,5 +21,6 @@ namespace Zenith_MAUI.Business.DTO
         public LookupDTO MediaType { get; set; }
         public int LikesCount { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool? IsLiked { get; set; }
     }
 }

@@ -12,7 +12,11 @@ public partial class PlaylistComponent : ContentView
         BindableProperty.Create(nameof(Id), typeof(int), typeof(PlaylistComponent), 0, BindingMode.OneWay);
 
     public static BindableProperty CreatedAtProperty =
-        BindableProperty.Create(nameof(CreatedAt), typeof(DateTime), typeof(PlaylistComponent), "/", BindingMode.OneWay);
+        BindableProperty.Create(nameof(CreatedAt), typeof(DateTime), typeof(PlaylistComponent), DateTime.MinValue, BindingMode.OneWay);
+
+    public static BindableProperty TracksCountProperty =
+       BindableProperty.Create(nameof(TracksCount), typeof(int), typeof(PlaylistComponent), 0, BindingMode.OneWay);
+
 
 
     public PlaylistComponent()
@@ -32,10 +36,16 @@ public partial class PlaylistComponent : ContentView
         set => SetValue(IdProperty, value);
     }
 
-    public string CreatedAt
+    public DateTime CreatedAt
     {
-        get => (string)GetValue(CreatedAtProperty);
+        get => (DateTime)GetValue(CreatedAtProperty);
         set => SetValue(CreatedAtProperty, value);
+    }
+
+    public int TracksCount
+    {
+        get => (int)GetValue(TracksCountProperty);
+        set => SetValue(TracksCountProperty, value);
     }
 
 }

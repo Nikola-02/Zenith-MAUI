@@ -9,32 +9,15 @@
             <StackLayout>
                 <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" />
 
-                <Image Margin="0,15,0,0" Source="{Binding Image, StringFormat='http://localhost:5001/tracks/images/{0}'}" HeightRequest="150"/>
-
-                <Label FontSize="16" Text="{Binding Description}" FontAttributes="Italic" />
+                <Label FontSize="16" Text="{Binding CreatedAt}" FontAttributes="Italic" />
 
                 <FlexLayout Margin="0,15,0,0" AlignContent="Center">
-                    <Label Text="Price ($): " />
-                    <Label Text="{Binding Price}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                </FlexLayout>
-
-                <FlexLayout Margin="0,15,0,0">
-                    <Label Text="Duration: " />
-                    <Label Text="{Binding Duration}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                </FlexLayout>
-
-                <FlexLayout Margin="0,15,0,0">
-                    <Label Text="Artist: " />
-                    <Label Text="{Binding Artist}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
-                </FlexLayout>
-
-                <FlexLayout Margin="0,15,0,0">
-                    <Label Text="Likes count: " />
-                    <Label Text="{Binding LikesCount}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
+                    <Label Text="Tracks count: " />
+                    <Label Text="{Binding TracksCount}" Margin="5,0,0,0" FontAttributes="Bold" FontSize="16" />
                 </FlexLayout>
 
 
-                <Button Margin="0,20,0,0"  FontSize="Micro" Text="View" Clicked="Button_Clicked"/>
+                <Button Margin="0,20,0,0"  FontSize="Micro" Text="Delete" />
             </StackLayout>
         </Border>
 

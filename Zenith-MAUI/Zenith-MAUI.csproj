@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\PlaylistComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\TrackComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

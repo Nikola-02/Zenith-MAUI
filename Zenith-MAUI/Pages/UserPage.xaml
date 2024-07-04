@@ -7,4 +7,5 @@
 
     <local:Tracks></local:Tracks>
     <local:Profile></local:Profile>
+    <local:Playlists></local:Playlists>
 </TabbedPage>

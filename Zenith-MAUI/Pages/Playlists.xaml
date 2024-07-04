@@ -10,9 +10,13 @@
     </ContentPage.BindingContext>
 
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+            <Label 
+             Text="Welcome to Your Playlists!"
+             FontSize="20"
+             FontAttributes="Bold"
+             Margin="0,15,0,0"
+             TextColor="BlueViolet"
+             VerticalOptions="Center" 
+             HorizontalOptions="Center" />
+        </VerticalStackLayout>
 </ContentPage>

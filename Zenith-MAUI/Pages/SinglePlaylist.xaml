@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Zenith_MAUI.ViewModels"
+             x:Class="Zenith_MAUI.Pages.SinglePlaylist"
+             Title="SinglePlaylist">
+
+    <VerticalStackLayout>
+        <Label 
+             Text="{Binding PlaylistTitle.Value}"
+             FontSize="24"
+             FontAttributes="Bold"
+             Margin="0,15,0,0"
+             VerticalOptions="Center" 
+             HorizontalOptions="Center" />
+        
+        <Button Text="Go back to playlists" HorizontalOptions="Center" Margin="40,15,40,35" Clicked="Button_Clicked" />
+
+        <CollectionView ItemsSource="{Binding Tracks}" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="15" Margin="20,0,0,20">
+                        <FlexLayout Margin="0,15,0,0" AlignContent="Center" JustifyContent="SpaceBetween">
+                            <Label Text="{Binding Name}" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <Button 
+                                Text="Remove"
+                                Margin="0,0,0,0"
+                                BackgroundColor="PaleVioletRed"
+                                Clicked="Button_Clicked_1"
+                                CommandParameter="{Binding Id}"/>
+                        </FlexLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

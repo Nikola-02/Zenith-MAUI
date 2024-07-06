@@ -48,4 +48,13 @@ public partial class PlaylistComponent : ContentView
         set => SetValue(TracksCountProperty, value);
     }
 
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -1,24 +1,20 @@
-using FluentValidation;
-using FluentValidation.Results;
 using RestSharp;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Zenith_MAUI.Common;
-using Zenith_MAUI.Validators;
 
 namespace Zenith_MAUI.Pages;
 
-public partial class AddPlaylistPage : ContentPage
+public partial class EditPlaylistPage : ContentPage
 {
+    public int Id { get; set; }
     public MProp<string> Name { get; set; } = new MProp<string>();
     public MProp<string> Error { get; set; } = new MProp<string>();
 
-    public AddPlaylistPage()
-	{
+    public EditPlaylistPage()
+    {
         Name.OnChange = Validate;
 
         InitializeComponent();
-	}
+    }
 
     private void Button_Clicked(object sender, EventArgs e)
     {
@@ -31,7 +27,7 @@ public partial class AddPlaylistPage : ContentPage
 
         try
         {
-            RestRequest request = new RestRequest("playlists");
+            RestRequest request = new RestRequest("playlists/");
 
             request.AddJsonBody(new { name });
 
@@ -51,7 +47,7 @@ public partial class AddPlaylistPage : ContentPage
         {
             Error.Value = "Naziv je zauzet.";
         }
-        
+
     }
 
     private void Validate()
@@ -74,5 +70,10 @@ public partial class AddPlaylistPage : ContentPage
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void Button_Clicked_2(object sender, EventArgs e)
+    {
+
     }
 }

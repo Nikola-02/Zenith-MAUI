@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zenith_MAUI.Pages.EditPlaylistPage"
+             x:Name="Self"
+             Title="EditPlaylistPage">
+    <VerticalStackLayout BindingContext="{x:Reference Self}">
+        <Label 
+          Text="Edit playlist here"
+          FontSize="20"
+          FontAttributes="Bold"
+          Margin="40,50,40,0"
+          VerticalOptions="Center" />
+
+        <Editor Margin="40,10,40,0"  Text="{Binding Name.Value}" />
+        <Label Text="{Binding Name.Error}" IsVisible="{Binding Name.HasError}" Margin="40,10,0,0" TextColor="Red" />
+        <Label Text="{Binding Error.Value}" Margin="40,10,0,0" TextColor="Red" />
+
+        <Button Text="Save" Margin="50,20,50,0" Clicked="Button_Clicked_1" />
+
+
+
+        <Button 
+     Text="Close"
+     Clicked="Button_Clicked"
+     Margin="50,20,50,0" />
+    </VerticalStackLayout>
+</ContentPage>

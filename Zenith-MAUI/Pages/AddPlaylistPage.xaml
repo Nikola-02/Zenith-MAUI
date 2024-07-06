@@ -2,19 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Zenith_MAUI.Pages.AddPlaylistPage"
+             x:Name="Self"
              Title="AddPlaylistPage">
-    <VerticalStackLayout>
+    <VerticalStackLayout BindingContext="{x:Reference Self}">
         <Label 
-             Text="Add playlist!"
+             Text="Add playlist here"
              FontSize="20"
              FontAttributes="Bold"
-             Margin="0,15,0,0"
-             VerticalOptions="Center" 
-             HorizontalOptions="Center" />
+             Margin="40,50,40,0"
+             VerticalOptions="Center" />
+
+        <Editor Margin="40,10,40,0"  Text="{Binding Name.Value}" />
+        <Label Text="{Binding Name.Error}" Margin="40,10,0,0" TextColor="Red" />
+
+        <Button Text="Save" Margin="50,40,50,0" Clicked="Button_Clicked_1" />
 
         <Button 
             Text="Close"
             Clicked="Button_Clicked"
-            Margin="0,20,0,0" />
+            Margin="50,20,50,0" />
     </VerticalStackLayout>
 </ContentPage>

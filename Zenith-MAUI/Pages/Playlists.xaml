@@ -20,7 +20,12 @@
                  HorizontalOptions="Center" />
 
 
-            <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="550">
+        <Button 
+            Text="Add playlist"
+            BackgroundColor="Green"
+            Clicked="Button_Clicked"/>
+
+        <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="550">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     <cmp:PlaylistComponent Id="{Binding Id}" Name="{Binding Name}" CreatedAt="{Binding CreatedAt}" TracksCount="{Binding Tracks.Count}"/>

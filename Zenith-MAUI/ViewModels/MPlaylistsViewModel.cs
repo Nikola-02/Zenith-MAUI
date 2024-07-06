@@ -7,19 +7,24 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Media.Playlists;
 using Zenith_MAUI.Business.DTO;
 
 namespace Zenith_MAUI.ViewModels
 {
-    public class MPlaylistsViewModel
+    public class MPlaylistsViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<PlaylistDTO> Playlists { get; set; } = new ObservableCollection<PlaylistDTO>();
 
         public MPlaylistsViewModel()
         {
             LoadPlaylists();
+
+            RefreshPageCommand = new Command(LoadPlaylists);
         }
+
+        public ICommand RefreshPageCommand { get; set; }
 
         private void LoadPlaylists()
         {
@@ -30,8 +35,9 @@ namespace Zenith_MAUI.ViewModels
             if (response.IsSuccessful)
             {
                 var playlists = response.Data.Data;
-                Playlists.Clear();
+                //Playlists.Clear();
                 Playlists = new ObservableCollection<PlaylistDTO>(playlists);
+                OnPropertyChanged(nameof(Playlists));
             }
 
         }

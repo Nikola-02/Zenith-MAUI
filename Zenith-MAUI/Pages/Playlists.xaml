@@ -26,6 +26,8 @@
             BackgroundColor="Green"
             Clicked="Button_Clicked"/>
 
+        <Button Margin="90,15,90,0" Text="Refresh page" Command="{Binding RefreshPageCommand}" />
+
         <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="550">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -10,16 +10,6 @@ namespace Zenith_MAUI.Pages;
 public partial class SingleTrack : ContentPage
 
 {
-    //public int Id { get; set; }
-    //public string Name { get; set; }
-    //public string Description { get; set; }
-    //public int Duration { get; set; }
-    //public double Price { get; set; }
-    //public string Image { get; set; }
-    //public string Artist { get; set; }
-    //public string Album { get; set; }
-    //public string Genre { get; set; }
-    //public int LikesCount { get; set; }
 
     public MProp<int> Id { get; set; } = new MProp<int>();
     public MProp<string> Name { get; set; } = new MProp<string>();

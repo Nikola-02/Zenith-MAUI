@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Xml.Linq;
+using Zenith_MAUI.Pages;
 
 namespace Zenith_MAUI.Components;
 
@@ -55,6 +56,6 @@ public partial class PlaylistComponent : ContentView
 
     private void Button_Clicked_1(object sender, EventArgs e)
     {
-
+        App.Current.MainPage.Navigation.PushModalAsync(new EditPlaylistPage(Id, Name));
     }
 }

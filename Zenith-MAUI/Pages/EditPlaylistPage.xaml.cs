@@ -1,5 +1,10 @@
+using FluentValidation;
+using FluentValidation.Results;
 using RestSharp;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Zenith_MAUI.Common;
+using Zenith_MAUI.Validators;
 
 namespace Zenith_MAUI.Pages;
 
@@ -9,8 +14,11 @@ public partial class EditPlaylistPage : ContentPage
     public MProp<string> Name { get; set; } = new MProp<string>();
     public MProp<string> Error { get; set; } = new MProp<string>();
 
-    public EditPlaylistPage()
+    public EditPlaylistPage(int id, string name)
     {
+        Id = id;
+        Name.Value = name;
+
         Name.OnChange = Validate;
 
         InitializeComponent();
@@ -27,21 +35,28 @@ public partial class EditPlaylistPage : ContentPage
 
         try
         {
-            RestRequest request = new RestRequest("playlists/");
+            MEditPlaylistValidator validator = new MEditPlaylistValidator();
 
-            request.AddJsonBody(new { name });
+            ValidationResult result = validator.Validate(this);
 
-            var response = Api.Client.Post(request);
-
-            if (response.IsSuccessful)
+            if (result.IsValid)
             {
-                App.Current.MainPage.Navigation.PopModalAsync();
-                //App.Current.MainPage.Navigation.PushAsync(new Playlists());
+                RestRequest request = new RestRequest("playlists/" + Id);
+
+                request.AddJsonBody(new { name });
+
+                var response = Api.Client.Put(request);
+
+                if (response.IsSuccessful)
+                {
+                    App.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    Error.Value = response.ErrorMessage;
+                }
             }
-            else
-            {
-                Error.Value = response.ErrorMessage;
-            }
+            
         }
         catch (Exception ex)
         {
@@ -52,7 +67,7 @@ public partial class EditPlaylistPage : ContentPage
 
     private void Validate()
     {
-        MAddEditPlaylistValidator validator = new MAddEditPlaylistValidator();
+        MEditPlaylistValidator validator = new MEditPlaylistValidator();
 
         ValidationResult result = validator.Validate(this);
 
@@ -70,10 +85,5 @@ public partial class EditPlaylistPage : ContentPage
     protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private void Button_Clicked_2(object sender, EventArgs e)
-    {
-
     }
 }

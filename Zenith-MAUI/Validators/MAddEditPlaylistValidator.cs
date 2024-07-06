@@ -8,9 +8,21 @@ using Zenith_MAUI.Pages;
 
 namespace Zenith_MAUI.Validators
 {
-    public class MAddEditPlaylistValidator : AbstractValidator<AddPlaylistPage>
+    public class MAddPlaylistValidator : AbstractValidator<AddPlaylistPage>
     {
-        public MAddEditPlaylistValidator()
+        public MAddPlaylistValidator()
+        {
+            CascadeMode = CascadeMode.StopOnFirstFailure;
+
+            RuleFor(x => x.Name.Value)
+                .NotEmpty()
+                .WithMessage("Naziv je obavezan.");
+        }
+    }
+
+    public class MEditPlaylistValidator : AbstractValidator<EditPlaylistPage>
+    {
+        public MEditPlaylistValidator()
         {
             CascadeMode = CascadeMode.StopOnFirstFailure;
 

@@ -13,16 +13,16 @@
           VerticalOptions="Center" />
 
         <Editor Margin="40,10,40,0"  Text="{Binding Name.Value}" />
+        
         <Label Text="{Binding Name.Error}" IsVisible="{Binding Name.HasError}" Margin="40,10,0,0" TextColor="Red" />
         <Label Text="{Binding Error.Value}" Margin="40,10,0,0" TextColor="Red" />
 
         <Button Text="Save" Margin="50,20,50,0" Clicked="Button_Clicked_1" />
 
-
-
         <Button 
-     Text="Close"
-     Clicked="Button_Clicked"
-     Margin="50,20,50,0" />
+         Text="Close"
+         Clicked="Button_Clicked"
+         Margin="50,20,50,0" />
+        
     </VerticalStackLayout>
 </ContentPage>

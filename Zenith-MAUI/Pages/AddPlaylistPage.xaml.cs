@@ -31,20 +31,27 @@ public partial class AddPlaylistPage : ContentPage
 
         try
         {
-            RestRequest request = new RestRequest("playlists");
+            MAddPlaylistValidator validator = new MAddPlaylistValidator();
 
-            request.AddJsonBody(new { name });
+            ValidationResult result = validator.Validate(this);
 
-            var response = Api.Client.Post(request);
-
-            if (response.IsSuccessful)
+            if (result.IsValid)
             {
-                App.Current.MainPage.Navigation.PopModalAsync();
-                //App.Current.MainPage.Navigation.PushAsync(new Playlists());
-            }
-            else
-            {
-                Error.Value = response.ErrorMessage;
+                RestRequest request = new RestRequest("playlists");
+
+                request.AddJsonBody(new { name });
+
+                var response = Api.Client.Post(request);
+
+                if (response.IsSuccessful)
+                {
+                    App.Current.MainPage.Navigation.PopModalAsync();
+                    //App.Current.MainPage.Navigation.PushAsync(new Playlists());
+                }
+                else
+                {
+                    Error.Value = response.ErrorMessage;
+                }
             }
         }
         catch (Exception ex)
@@ -56,7 +63,7 @@ public partial class AddPlaylistPage : ContentPage
 
     private void Validate()
     {
-        MAddEditPlaylistValidator validator = new MAddEditPlaylistValidator();
+        MAddPlaylistValidator validator = new MAddPlaylistValidator();
 
         ValidationResult result = validator.Validate(this);
 

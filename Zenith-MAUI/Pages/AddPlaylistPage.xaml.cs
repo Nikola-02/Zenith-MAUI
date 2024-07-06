@@ -1,3 +1,4 @@
+using FluentValidation;
 using FluentValidation.Results;
 using RestSharp;
 using System.ComponentModel;
@@ -28,21 +29,29 @@ public partial class AddPlaylistPage : ContentPage
     {
         var name = Name.Value;
 
-        RestRequest request = new RestRequest("playlists");
-
-        request.AddJsonBody(new { name });
-
-        var response = Api.Client.Post(request);
-
-        if (response.IsSuccessful)
+        try
         {
-            App.Current.MainPage.Navigation.PopModalAsync();
-            //App.Current.MainPage.Navigation.PushAsync(new Playlists());
+            RestRequest request = new RestRequest("playlists");
+
+            request.AddJsonBody(new { name });
+
+            var response = Api.Client.Post(request);
+
+            if (response.IsSuccessful)
+            {
+                App.Current.MainPage.Navigation.PopModalAsync();
+                //App.Current.MainPage.Navigation.PushAsync(new Playlists());
+            }
+            else
+            {
+                Error.Value = response.ErrorMessage;
+            }
         }
-        else
+        catch (Exception ex)
         {
-           Error.Value = response.ErrorMessage;
+            Error.Value = "Naziv je zauzet.";
         }
+        
     }
 
     private void Validate()

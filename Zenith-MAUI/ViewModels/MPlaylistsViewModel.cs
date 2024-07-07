@@ -21,9 +21,16 @@ namespace Zenith_MAUI.ViewModels
             LoadPlaylists();
 
             RefreshPageCommand = new Command(LoadPlaylists);
+            CloseCommand = new Command(Close);
         }
 
         public ICommand RefreshPageCommand { get; set; }
+        public ICommand CloseCommand { get; set; }
+
+        private void Close()
+        {
+            App.Current.MainPage.Navigation.PopAsync();
+        }
 
         private void LoadPlaylists()
         {
@@ -34,7 +41,7 @@ namespace Zenith_MAUI.ViewModels
             if (response.IsSuccessful)
             {
                 var playlists = response.Data.Data;
-                //Playlists.Clear();
+                Playlists.Clear();
                 Playlists = new ObservableCollection<PlaylistDTO>(playlists);
                 OnPropertyChanged(nameof(Playlists));
             }

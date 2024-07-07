@@ -27,6 +27,8 @@
             Clicked="Button_Clicked"/>
 
         <Button Margin="90,15,90,0" Text="Refresh page" Command="{Binding RefreshPageCommand}" />
+        
+        <Button Margin="90,15,90,0" Text="Close page" Command="{Binding CloseCommand}" />
 
         <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="550">
                 <CollectionView.ItemTemplate>

@@ -21,7 +21,7 @@ public partial class SinglePlaylist : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        App.Current.MainPage = new NavigationPage(new Playlists());
+        App.Current.MainPage = new Playlists();
     }
 
     private void Button_Clicked_1(object sender, EventArgs e)

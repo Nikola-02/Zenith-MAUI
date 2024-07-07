@@ -81,6 +81,6 @@ public partial class PlaylistComponent : ContentView
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        App.Current.MainPage = new NavigationPage(new SinglePlaylist(Id));
+        App.Current.MainPage.Navigation.PushAsync(new SinglePlaylist(Id));
     }
 }

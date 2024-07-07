@@ -14,7 +14,7 @@
              VerticalOptions="Center" 
              HorizontalOptions="Center" />
         
-        <Button Text="Go back to playlists" HorizontalOptions="Center" Margin="40,15,40,35" Clicked="Button_Clicked" />
+        <!--<Button Text="Go back to playlists" HorizontalOptions="Center" Margin="40,15,40,35" Clicked="Button_Clicked" />-->
 
         <CollectionView ItemsSource="{Binding Tracks}" >
             <CollectionView.ItemTemplate>

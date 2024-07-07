@@ -1,5 +1,6 @@
 using Microsoft.Maui;
 using RestSharp;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Zenith_MAUI.Business.DTO;
@@ -8,9 +9,7 @@ using Zenith_MAUI.Common;
 namespace Zenith_MAUI.Pages;
 
 public partial class SingleTrack : ContentPage
-
 {
-
     public MProp<int> Id { get; set; } = new MProp<int>();
     public MProp<string> Name { get; set; } = new MProp<string>();
     public MProp<double> Price { get; set; } = new MProp<double>();
@@ -22,6 +21,12 @@ public partial class SingleTrack : ContentPage
     public MProp<string> Genre { get; set; } = new MProp<string>();
     public MProp<int> LikesCount { get; set; } = new MProp<int>();
     public MProp<bool> IsLiked { get; set; } = new MProp<bool>();
+    public MProp<bool> IsError { get; set; } = new MProp<bool>();
+    public MProp<bool> IsConflict { get; set; } = new MProp<bool>();
+
+    public ObservableCollection<PlaylistDTO> Playlists { get; set; } = new ObservableCollection<PlaylistDTO>();
+
+    public MProp<PlaylistDTO> SelectedPlaylist { get; set; } = new MProp<PlaylistDTO>();
 
 
     //public static BindableProperty TrackProperty =
@@ -53,6 +58,7 @@ public partial class SingleTrack : ContentPage
         LikesCount.Value = likesCount;
 
         GetTrack();
+        GetPlaylistsForUser();
     }
 
     private void GetTrack()
@@ -66,6 +72,31 @@ public partial class SingleTrack : ContentPage
         {
             IsLiked.Value = (bool)response.Data.exists;
             OnPropertyChanged(nameof(IsLiked));
+        }
+    }
+
+    private void GetPlaylistsForUser()
+    {
+        RestRequest request = new RestRequest("playlists/mine");
+
+        var response = Api.Client.Execute<PagedResponse<PlaylistDTO>>(request);
+
+        if (response.IsSuccessful)
+        {
+            var playlists = response.Data.Data;
+
+            Playlists.Clear();
+
+            foreach (var item in playlists)
+            {
+                Playlists.Add(item);
+            }
+
+            SelectedPlaylist.Value = Playlists.FirstOrDefault();
+
+
+            OnPropertyChanged(nameof(Playlists));
+            OnPropertyChanged(nameof(SelectedPlaylist));
         }
     }
 
@@ -121,6 +152,46 @@ public partial class SingleTrack : ContentPage
     private void Button_Clicked_1(object sender, EventArgs e)
     {
         LikeUndoTrack();
+    }
+
+    private void Button_Clicked_2(object sender, EventArgs e)
+    {
+        try
+        {
+            var playlistId = SelectedPlaylist.Value.Id;
+
+            RestRequest request = new RestRequest("playlists/" + playlistId + "/track");
+
+            request.AddJsonBody(new { trackId = Id.Value });
+
+            var response = Api.Client.Post(request);
+
+            if (response.IsSuccessful)
+            {
+                App.Current.MainPage = new SinglePlaylist(playlistId);
+
+                IsError.Value = false;
+                IsConflict.Value = false;
+            }
+            else
+            {
+                IsError.Value = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            var exMessage = ex.Message;
+
+            if (exMessage == "Request failed with status code Conflict")
+            {
+                IsConflict.Value = true;
+            }
+            else
+            {
+                IsError.Value = true;
+            }
+        }
+        
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

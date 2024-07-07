@@ -14,10 +14,14 @@ namespace Zenith_MAUI.Validators
         {
             CascadeMode = CascadeMode.StopOnFirstFailure;
 
-            RuleFor(x => x.Email.Value).NotEmpty()
-                                       .WithMessage("Email je obavezan.")
-                                       .EmailAddress()
-                                       .WithMessage("Email nije ispravnog formata.");
+            RuleFor(x => x.Username.Value).NotEmpty()
+                                       .WithMessage("Username je obavezan.");
+
+            RuleFor(x => x.FirstName.Value).NotEmpty()
+                                       .WithMessage("FirstName je obavezan.");
+
+            RuleFor(x => x.LastName.Value).NotEmpty()
+                                       .WithMessage("LastName je obavezan.");
 
             RuleFor(x => x.Email.Value).NotEmpty()
                                        .WithMessage("Email je obavezan.")

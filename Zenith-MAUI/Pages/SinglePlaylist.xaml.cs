@@ -21,7 +21,8 @@ public partial class SinglePlaylist : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        App.Current.MainPage = new Playlists();
+        App.Current.MainPage.Navigation.PopAsync();
+        App.Current.MainPage.Navigation.PopModalAsync();
     }
 
     private void Button_Clicked_1(object sender, EventArgs e)

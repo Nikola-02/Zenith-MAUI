@@ -34,6 +34,7 @@ namespace Zenith_MAUI.ViewModels
 
         public ICommand NextCommand { get; }
         public ICommand PrevCommand { get; }
+        public ICommand RefreshPageCommand { get; }
 
         public TracksViewModel()
         {
@@ -41,11 +42,17 @@ namespace Zenith_MAUI.ViewModels
 
             NextCommand = new Command(Next);
             PrevCommand = new Command(Prev);
+            RefreshPageCommand = new Command(RefreshPage);
 
             Tracks = new ObservableCollection<TrackDTO>();
 
             Page.Value = 1;
 
+            LoadTracks();
+        }
+
+        public void RefreshPage()
+        {
             LoadTracks();
         }
 

@@ -19,6 +19,7 @@
 
         <SearchBar Margin="20,10,20,0" Text="{Binding Keyword.Value}" Placeholder="Search by..."/>
 
+        <Button Margin="90,15,90,0" Text="Refresh page" Command="{Binding RefreshPageCommand}" />
 
         <CollectionView ItemsSource="{Binding Tracks}" HeightRequest="550">
             <CollectionView.ItemTemplate>

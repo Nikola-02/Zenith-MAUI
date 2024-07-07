@@ -23,6 +23,7 @@ namespace Zenith_MAUI.ViewModels
         public MLoginViewModel()
         {
             LoginCommand = new Command(Login);
+            GoToRegisterCommand = new Command(GoToRegister);
 
             Email.OnChange = Validate;
             Password.OnChange = Validate;
@@ -33,6 +34,12 @@ namespace Zenith_MAUI.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand GoToRegisterCommand { get; }
+
+        private void GoToRegister()
+        {
+            App.Current.MainPage = new Register();
+        }
 
         private void Validate()
         {

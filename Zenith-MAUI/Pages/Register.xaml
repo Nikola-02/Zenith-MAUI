@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zenith_MAUI.Pages.Register"
+             xmlns:local="clr-namespace:Zenith_MAUI.ViewModels"
+             Title="Register">
+    
+    <ContentPage.BindingContext>
+        <local:MRegisterViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+        Padding="30,50"
+    >
+
+            <Label
+                Text="Register here:"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level6" Margin="0,30" />
+
+            <Entry Placeholder="Username" Text="{Binding Username.Value}"  />
+            <Label Text="{Binding Username.Error}" TextColor="Red" />
+
+            <Entry Placeholder="Email" Text="{Binding Email.Value}"  />
+            <Label Text="{Binding Email.Error}" TextColor="Red" />
+
+            <Entry Placeholder="FirstName" Text="{Binding FirstName.Value}"  />
+            <Label Text="{Binding FirstName.Error}" TextColor="Red" />
+
+            <Entry Placeholder="LastName" Text="{Binding LastName.Value}"  />
+            <Label Text="{Binding LastName.Error}" TextColor="Red" />
+
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password.Value}" />
+            <Label IsVisible="{Binding Password.HasError}" Text="{Binding Password.Error}" TextColor="Red" />
+
+            <Button
+                x:Name="RegisterBtn"
+                Margin="0,20,0,0"
+                IsEnabled="{Binding ButtonEnabled.Value}"
+                Text="Register" 
+                Command="{Binding RegisterCommand}"
+                SemanticProperties.Hint="Register user"
+                HorizontalOptions="Fill" />
+
+            
+            <Label Text="Error occurred." IsVisible="{Binding ErrorOccurred.Value}" TextColor="Red"/>
+
+            <Button
+                Margin="0,20,0,0"
+                Text="Go to login" 
+                Command="{Binding GoToLoginCommand}"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

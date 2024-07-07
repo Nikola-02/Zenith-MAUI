@@ -35,6 +35,12 @@
             HorizontalOptions="Fill" />
 
             <Label Text="Invalid credentials." IsVisible="{Binding InvalidCredentials.Value}" TextColor="Red"/>
+
+            <Button
+                Margin="0,20,0,0"
+                Text="Go to register" 
+                Command="{Binding GoToRegisterCommand}"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

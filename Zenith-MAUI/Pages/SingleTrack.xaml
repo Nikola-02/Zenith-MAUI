@@ -75,6 +75,14 @@
                     </FlexLayout>
                    
                     <Label 
+                       IsVisible="{Binding IsAdded.Value}"
+                       Text="Pesma je uspesno dodata u plejlistu."
+                       Margin="0,5,0,20"
+                       TextColor="Green"
+                       HorizontalOptions="Center"
+                       />
+                    
+                    <Label 
                         IsVisible="{Binding IsError.Value}"
                         Text="Greska se desila, prilikom dodavanja u plejlistu."
                         Margin="0,5,0,20"
@@ -89,8 +97,6 @@
                         TextColor="MediumVioletRed"
                         HorizontalOptions="Center"
                         />
-
-
 
                     <Button 
                     Text="Close"

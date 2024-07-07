@@ -23,6 +23,7 @@ public partial class SingleTrack : ContentPage
     public MProp<bool> IsLiked { get; set; } = new MProp<bool>();
     public MProp<bool> IsError { get; set; } = new MProp<bool>();
     public MProp<bool> IsConflict { get; set; } = new MProp<bool>();
+    public MProp<bool> IsAdded { get; set; } = new MProp<bool>();
 
     public ObservableCollection<PlaylistDTO> Playlists { get; set; } = new ObservableCollection<PlaylistDTO>();
 
@@ -168,19 +169,22 @@ public partial class SingleTrack : ContentPage
 
             if (response.IsSuccessful)
             {
-                App.Current.MainPage = new SinglePlaylist(playlistId);
+                IsAdded.Value = true;
 
                 IsError.Value = false;
                 IsConflict.Value = false;
             }
             else
             {
+                IsAdded.Value = false;
                 IsError.Value = true;
             }
         }
         catch (Exception ex)
         {
             var exMessage = ex.Message;
+
+            IsAdded.Value = false;
 
             if (exMessage == "Request failed with status code Conflict")
             {

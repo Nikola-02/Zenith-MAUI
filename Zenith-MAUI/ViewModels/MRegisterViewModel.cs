@@ -21,6 +21,7 @@ namespace Zenith_MAUI.ViewModels
         public MProp<string> Password { get; set; } = new MProp<string>();
         public MProp<bool> ButtonEnabled { get; set; } = new MProp<bool>();
         public MProp<bool> ErrorOccurred { get; set; } = new MProp<bool>();
+        public MProp<bool> FormatError { get; set; } = new MProp<bool>();
 
         public MRegisterViewModel()
         {
@@ -78,20 +79,40 @@ namespace Zenith_MAUI.ViewModels
             string lastName = LastName.Value;
             string password = Password.Value;
 
-            RestRequest request = new RestRequest("users");
-
-            request.AddJsonBody(new { username, email, password, firstName, lastName });
-
-            var response = Api.Client.Post(request);
-
-            if (response.IsSuccessful)
+            try
             {
-                App.Current.MainPage = new Login();
+                RestRequest request = new RestRequest("users");
+
+                request.AddJsonBody(new { username, email, password, firstName, lastName });
+
+                var response = Api.Client.Post(request);
+
+                if (response.IsSuccessful)
+                {
+                    App.Current.MainPage = new Login();
+
+                    ErrorOccurred.Value = false;
+                    FormatError.Value = false;
+                }
+                else
+                {
+                    ErrorOccurred.Value = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ErrorOccurred.Value = true;
+                if (ex.Message  == "Request failed with status code UnprocessableEntity")
+                {
+                    FormatError.Value = true;
+                }
+                else
+                {
+
+                    ErrorOccurred.Value = true;
+                }
             }
+
+            
         }
     }
 }

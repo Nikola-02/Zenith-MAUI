@@ -44,7 +44,9 @@
                 HorizontalOptions="Fill" />
 
             
-            <Label Text="Error occurred." IsVisible="{Binding ErrorOccurred.Value}" TextColor="Red"/>
+            <Label Text="Error occurred." Margin="0,15,0,0" IsVisible="{Binding ErrorOccurred.Value}" TextColor="Red"/>
+
+            <Label Text="Format of fields are not right or some fields have already taken names." Margin="0,15,0,0" IsVisible="{Binding FormatError.Value}" TextColor="Red"/>
 
             <Button
                 Margin="0,20,0,0"

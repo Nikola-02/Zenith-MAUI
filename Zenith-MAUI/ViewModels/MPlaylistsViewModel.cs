@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Zenith_MAUI.Business.DTO;
+using Zenith_MAUI.Pages;
 
 namespace Zenith_MAUI.ViewModels
 {
@@ -29,7 +30,7 @@ namespace Zenith_MAUI.ViewModels
 
         private void Close()
         {
-            App.Current.MainPage.Navigation.PopAsync();
+            App.Current.MainPage = new UserPage();
         }
 
         private void LoadPlaylists()

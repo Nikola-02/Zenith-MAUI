@@ -23,6 +23,7 @@
         <Button 
             Text="Add playlist"
             Margin="90,15,90,0"
+            TextColor="White"
             BackgroundColor="Green"
             Clicked="Button_Clicked"/>
 

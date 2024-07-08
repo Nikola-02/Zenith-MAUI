@@ -21,7 +21,7 @@
 
         <Button Margin="90,15,90,0" Text="Refresh page" Command="{Binding RefreshPageCommand}" />
 
-        <CollectionView ItemsSource="{Binding Tracks}" HeightRequest="550">
+        <CollectionView ItemsSource="{Binding Tracks}" HeightRequest="430">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <cmp:TrackComponent Id="{Binding Id}" Name="{Binding Name}" Description="{Binding Text}" Image="{Binding Image}" Price="{Binding Price}" Duration="{Binding Duration}" Artist="{Binding Artist.Name}" Album="{Binding Album.Name}" Genre="{Binding Genre.Name}" LikesCount="{Binding LikesCount}"/>

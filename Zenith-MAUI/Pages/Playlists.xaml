@@ -31,7 +31,7 @@
         
         <Button Margin="90,15,90,0" Text="Close page" Command="{Binding CloseCommand}" />
 
-        <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="550">
+        <CollectionView ItemsSource="{Binding Playlists}" HeightRequest="400">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     <cmp:PlaylistComponent Id="{Binding Id}" Name="{Binding Name}" CreatedAt="{Binding CreatedAt}" TracksCount="{Binding Tracks.Count}"/>
